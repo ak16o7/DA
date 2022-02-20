@@ -1,0 +1,34 @@
+
+# Chapter 3 Exercise ------------------------------------------------------
+
+options(scipen=999)
+RNGkind(sample.kind="Rounding")
+
+
+ggplot(data=BostonHousing, geom_histogram(binwidth=5))
+install.packages("ggplot2")
+library(ggplot2)
+  
+
+#aes gibt an wie die Beschriftung des Graphen sein soll
+qplot(BostonHousing$MEDV, geom="histogram")
+ggplot(data=BostonHousing, aes(BostonHousing$MEDV)) + geom_histogram(binwidth = 1, fill="purple")
+ggplot(data=BostonHousing, aes(MEDV)) + geom_histogram(binwidth = 5, fill="purple")
+ggplot(data=BostonHousing, aes(MEDV)) + geom_histogram(binwidth = 10, fill="purple")
+ggplot(data=BostonHousing, aes(MEDV)) + geom_histogram(binwidth = 200, fill="purple")
+ggplot(data=BostonHousing, aes(MEDV)) + geom_histogram(binwidth = 1, fill="purple", alpha=0.5)
+# alpha macht balken transparent
+
+ggplot(data=BostonHousing, aes(MEDV)) + geom_histogram(binwidth = 1,alpha=0.4, fill="purple")
+
+#c)Boxplot erstellen
+#in data frame umwandeln
+housing.df <- data.frame(BostonHousing)
+#CHAS in kategoriale Variable umwandeln, da sie nur 1 und 0 annehmen kann, R aber denkt dass dies eine kontinuierliche variable ist
+housing.df$CHAS <- as.factor(housing.df$CHAS)
+
+
+str(housing.df)
+
+
+ggplot(housing.df, aes(y=MEDV, x=CHAS)) + geom_boxplot(fill="orange", alpha=0.6) + stat_boxplot(geom="errorbar", width=0.3)
